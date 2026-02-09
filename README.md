@@ -1,70 +1,105 @@
 # kios-escrow
 
-Ethereum escrow smart contract for peer-to-peer transactions, deployed and verified on Sepolia testnet.
+A portfolio-grade Ethereum smart contract project implementing a **trustless escrow system** for peer-to-peer transactions.
 
-> ⚠️ This project is built for learning and portfolio purposes only.  
-> It has not been audited and should not be used in production.
-
----
-
-## Overview
-
-KiosEscrow is a simple Ethereum-based escrow smart contract designed for transactions where the buyer and seller do not meet face-to-face.
-
-The contract securely holds funds and releases them only after the buyer confirms receipt of goods or services, eliminating the need for a trusted third-party escrow.
+This repository demonstrates the evolution from a simple single-transaction escrow to a reusable **multi-escrow architecture**, designed with security, clarity, and real-world usability in mind.
 
 ---
 
-## Deployed Contract (Sepolia Testnet)
+## Project Overview
 
-- Network: Sepolia Testnet
-- Contract Address: `0x55dBCF68c3B63a4a4fFD67F621d69264E1e605B9`
-- Explorer:  
-  https://testnet.routescan.io/address/0x55dBCF68c3B63a4a4fFD67F621d69264E1e605B9
-- Status: Verified
+The goal of this project is to showcase practical smart contract development using Solidity, including:
 
----
+- Secure ETH handling  
+- Access control  
+- Multi-transaction state management  
+- On-chain verification and testing  
 
-## Executed Escrow Flow (Public Testnet)
-
-The escrow contract has been fully executed on the Sepolia testnet with the following lifecycle:
-
-1. Contract deployed by buyer
-2. Buyer funded the escrow with 0.01 ETH
-3. Buyer confirmed receipt of goods
-4. Funds were released to the seller
-5. Escrow marked as completed and cannot be reused
-
-All transactions are publicly verifiable on the blockchain explorer.
+The contracts were deployed, verified, and tested on the **Sepolia testnet**.
 
 ---
 
-## Testing
+## Project Structure
 
-The contract was tested using Remix and the Sepolia public testnet.
-
-### Test Scenarios
-- Buyer successfully funded the escrow
-- Unauthorized accounts were blocked from funding or confirming
-- Double execution was prevented after completion
-- Funds were released only after buyer confirmation
-- Contract state updated correctly after settlement
+    kios-escrow/
+    ├─ contracts/
+    │  ├─ KiosEscrow.sol      (V1: Single escrow)
+    │  └─ KiosEscrowV2.sol    (V2: Multi-escrow system)
+    └─ README.md
 
 ---
 
-## Security Considerations
+## Project Evolution
 
-- Role-based access control (buyer vs seller)
-- Checks-effects-interactions pattern
-- ETH transfers implemented using `call`
-- Escrow completion state prevents replay or double spending
+### V1 — KiosEscrow.sol
+A simple escrow smart contract that supports **one transaction per contract**.
+
+**Purpose:**
+- Learn escrow fundamentals  
+- Understand ETH transfers and access control  
 
 ---
 
-## Key Learnings
+### V2 — KiosEscrowV2.sol (Main Project)
+A **multi-escrow smart contract** supporting **multiple concurrent escrow transactions** using unique escrow IDs.
 
-- Implemented a trustless escrow mechanism using Solidity
-- Deployed and verified a smart contract on a public testnet
-- Executed real transactions using MetaMask
-- Interacted with a verified contract via a blockchain explorer
-- Understood the full smart contract lifecycle from deployment to settlement
+**Key improvements:**
+- Multiple escrows in one contract  
+- Struct and mapping architecture  
+- Event logging  
+- Modifier-based access control  
+- Production-style escrow flow  
+
+---
+
+## Features (V2)
+
+- Create multiple escrow transactions  
+- Buyer-funded escrow using ETH  
+- Buyer-only confirmation to release funds  
+- Seller refund mechanism  
+- Secure access control via modifiers  
+- Events emitted for major actions  
+
+---
+
+## Smart Contract Flow (V2)
+
+1. Buyer creates an escrow  
+2. Buyer funds the escrow with ETH  
+3. Buyer confirms receipt  
+4. ETH is released to the seller (or refunded if needed)  
+
+All actions are scoped to a specific escrow ID.
+
+---
+
+## Testing and Deployment
+
+- **Network:** Sepolia Testnet (Chain ID: 11155111)  
+- **Status:** Deployed, verified, and tested end-to-end  
+
+**Contract Address (V2):**  
+`0x689B6eE3fA573ac679566B6bC6d8b29DbE2FeF70`
+
+---
+
+## Tools and Stack
+
+- Solidity ^0.8.20  
+- Remix IDE  
+- MetaMask  
+- Sepolia Testnet  
+- Blockscout / Sourcify  
+
+---
+
+## Notes
+
+This project was built as a **learning-to-production portfolio project**, focusing on clean architecture, secure ETH handling, and real-world usability.
+
+---
+
+## Author
+
+Built as part of a Web3 learning and portfolio journey, focused on smart contract development.
