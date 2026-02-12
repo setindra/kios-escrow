@@ -2,7 +2,7 @@
 
 A portfolio-grade Ethereum smart contract project implementing a **trustless escrow system** for peer-to-peer transactions.
 
-This repository demonstrates the evolution from a simple single-transaction escrow to a reusable **multi-escrow architecture**, designed with security, clarity, and real-world usability in mind.
+This repository demonstrates the evolution from a simple single-transaction escrow contract to a reusable **multi-escrow architecture**, designed with security, clarity, and real-world usability in mind.
 
 ---
 
@@ -11,9 +11,10 @@ This repository demonstrates the evolution from a simple single-transaction escr
 The goal of this project is to showcase practical smart contract development using Solidity, including:
 
 - Secure ETH handling  
-- Access control  
+- Access control design  
 - Multi-transaction state management  
-- On-chain verification and testing  
+- On-chain deployment and verification  
+- Clean contract architecture  
 
 The contracts were deployed, verified, and tested on the **Sepolia testnet**.
 
@@ -32,23 +33,30 @@ The contracts were deployed, verified, and tested on the **Sepolia testnet**.
 ## Project Evolution
 
 ### V1 — KiosEscrow.sol
+
 A simple escrow smart contract that supports **one transaction per contract**.
 
 **Purpose:**
-- Learn escrow fundamentals  
-- Understand ETH transfers and access control  
+- Learn escrow mechanics  
+- Understand ETH transfers  
+- Implement basic access control  
 
 ---
 
 ### V2 — KiosEscrowV2.sol (Main Project)
-A **multi-escrow smart contract** supporting **multiple concurrent escrow transactions** using unique escrow IDs.
 
-**Key improvements:**
-- Multiple escrows in one contract  
-- Struct and mapping architecture  
-- Event logging  
+A scalable **multi-escrow smart contract** supporting multiple concurrent escrow transactions using unique escrow IDs.
+
+**Key Improvements:**
+
+- Struct-based escrow modeling  
+- Mapping for escrow ID management  
 - Modifier-based access control  
-- Production-style escrow flow  
+- Event emission for transparency  
+- Reusable contract architecture  
+- Separation of state per transaction  
+
+This version reflects a more production-oriented contract design.
 
 ---
 
@@ -58,8 +66,9 @@ A **multi-escrow smart contract** supporting **multiple concurrent escrow transa
 - Buyer-funded escrow using ETH  
 - Buyer-only confirmation to release funds  
 - Seller refund mechanism  
-- Secure access control via modifiers  
-- Events emitted for major actions  
+- Escrow isolation using unique IDs  
+- Secure state validation  
+- Event logs for on-chain tracking  
 
 ---
 
@@ -68,9 +77,9 @@ A **multi-escrow smart contract** supporting **multiple concurrent escrow transa
 1. Buyer creates an escrow  
 2. Buyer funds the escrow with ETH  
 3. Buyer confirms receipt  
-4. ETH is released to the seller (or refunded if needed)  
+4. ETH is released to the seller (or refunded if necessary)  
 
-All actions are scoped to a specific escrow ID.
+All actions are scoped to a specific escrow ID to prevent transaction overlap.
 
 ---
 
@@ -81,6 +90,11 @@ All actions are scoped to a specific escrow ID.
 
 **Contract Address (V2):**  
 `0x689B6eE3fA573ac679566B6bC6d8b29DbE2FeF70`
+
+**Explorer:**  
+https://testnet.routescan.io/address/0x689B6eE3fA573ac679566B6bC6d8b29DbE2FeF70
+
+Transactions were successfully executed with full block confirmations on-chain.
 
 ---
 
@@ -94,12 +108,22 @@ All actions are scoped to a specific escrow ID.
 
 ---
 
+## Future Improvements
+
+- Add dispute resolution mechanism  
+- Implement time-based escrow expiration  
+- Add front-end integration (Next.js + Ethers.js)  
+- Add automated testing using Hardhat or Foundry  
+- Implement upgradeable contract pattern  
+
+---
+
 ## Notes
 
-This project was built as a **learning-to-production portfolio project**, focusing on clean architecture, secure ETH handling, and real-world usability.
+This project was built as a structured portfolio milestone, focusing on real-world contract behavior, state isolation, and secure ETH handling.
 
 ---
 
 ## Author
 
-Built as part of a Web3 learning and portfolio journey, focused on smart contract development.
+Built as part of a Web3 learning and portfolio journey, focused on smart contract engineering and decentralized application architecture.
